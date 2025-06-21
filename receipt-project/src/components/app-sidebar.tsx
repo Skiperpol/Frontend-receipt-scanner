@@ -1,4 +1,4 @@
-import { Home, CreditCard, Calendar, PlusCircle, History } from "lucide-react";
+import { Home, CreditCard, Calendar, PlusCircle } from "lucide-react";
 
 import {
   Sidebar,
@@ -14,10 +14,9 @@ import { NavUser } from "./nav-user";
 
 const items = [
   { title: "Dashboard", url: "/dashboard", icon: Home },
-  { title: "Dzienny raport", url: "/daily", icon: Calendar },
+  { title: "Dzienny raport", url: "/daily-raport", icon: Calendar },
   { title: "Transakcje", url: "/transactions", icon: CreditCard },
   { title: "Dodaj transakcję", url: "/add-transaction", icon: PlusCircle },
-  { title: "Historia", url: "/history", icon: History },
 ];
 
 export function AppSidebar() {

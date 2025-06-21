@@ -18,6 +18,8 @@ const LABELS: Record<string, string> = {
   products: "Produkty",
   dashboard: "Kokpit",
   login: "Logowanie",
+  "add-transaction": "Dodaj transakcję",
+  "daily-raport": "Dzienny raport",
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
