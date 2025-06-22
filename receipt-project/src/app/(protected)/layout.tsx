@@ -12,6 +12,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
+import React from "react";
 
 const LABELS: Record<string, string> = {
   transactions: "Transakcje",
@@ -62,19 +63,22 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <Breadcrumb>
             <BreadcrumbList>
               {crumbs.map((crumb, idx) => (
-                <BreadcrumbItem key={crumb.href}>
-                  <BreadcrumbLink
-                    href={crumb.href}
-                    {...(idx === crumbs.length - 1
-                      ? { "aria-current": "page" }
-                      : {})}
-                  >
-                    {crumb.label}
-                  </BreadcrumbLink>
+                <React.Fragment key={crumb.href}>
+                  <BreadcrumbItem>
+                    <BreadcrumbLink
+                      href={crumb.href}
+                      {...(idx === crumbs.length - 1
+                        ? { "aria-current": "page" }
+                        : {})}
+                    >
+                      {crumb.label}
+                    </BreadcrumbLink>
+                  </BreadcrumbItem>
+
                   {idx < crumbs.length - 1 && (
                     <BreadcrumbSeparator className="mx-2" />
                   )}
-                </BreadcrumbItem>
+                </React.Fragment>
               ))}
             </BreadcrumbList>
           </Breadcrumb>
