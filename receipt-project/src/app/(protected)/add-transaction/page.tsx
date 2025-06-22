@@ -12,7 +12,6 @@ export default function NewTransactionPage() {
   const router = useRouter();
 
   const [date, setDate] = useState("");
-  // const [total, setTotal] = useState("");
   const [desc, setDesc] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -31,7 +30,6 @@ export default function NewTransactionPage() {
           method: "POST",
           body: JSON.stringify({
             date,
-            // total_amount: total,
             total_amount: 0,
             description: desc,
           }),
@@ -49,33 +47,45 @@ export default function NewTransactionPage() {
     <div className="p-6 w-full">
       <form
         onSubmit={handleSubmit}
-        className="grid w-full grid-cols-[auto_1fr] gap-x-4 gap-y-2 items-end"
+        className="
+        grid grid-cols-1 gap-y-2
+        sm:flex sm:items-end sm:gap-x-4
+      "
       >
-        {/* DATA */}
-        <label className="text-sm font-medium mb-1" htmlFor="date">
-          Data
-        </label>
-        <label className="text-sm font-medium mb-1" htmlFor="desc">
-          Opis
-        </label>
+        <div className="w-full max-w-50 min-w-50 sm:w-1/4">
+          <label
+            htmlFor="date"
+            className="block text-sm font-medium mb-1 sm:mb-0"
+          >
+            Data
+          </label>
+          <Input
+            id="date"
+            type="datetime-local"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+            required
+            className="w-full"
+          />
+        </div>
 
-        <Input
-          id="date"
-          type="datetime-local"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-          required
-          className="w-fit"
-        />
-        <Input
-          id="desc"
-          value={desc}
-          onChange={(e) => setDesc(e.target.value)}
-          required
-          className="w-full"
-        />
+        <div className="w-full">
+          <label
+            htmlFor="desc"
+            className="block text-sm font-medium mb-1 sm:mb-0"
+          >
+            Opis
+          </label>
+          <Input
+            id="desc"
+            value={desc}
+            onChange={(e) => setDesc(e.target.value)}
+            required
+            className="w-full"
+          />
+        </div>
 
-        <div className="col-span-2 flex justify-end mt-4">
+        <div className="col-span-1 sm:ml-auto mt-4 sm:mt-0">
           <Button type="submit" disabled={loading}>
             {loading ? "Tworzenie..." : "Utwórz transakcję"}
           </Button>

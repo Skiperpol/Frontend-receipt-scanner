@@ -7,9 +7,14 @@ export async function apiFetch(
   if (!base) throw new Error('Brakuje NEXT_PUBLIC_API_BASE_URL w .env.local');
 
   const headers: HeadersInit = {
-    'Content-Type': 'application/json',
     ...(token ? { Authorization: `Token ${token}` } : {}),
   };
+
+  // Dodaj Content-Type: application/json tylko, gdy NIE używasz FormData
+  const isFormData = opts.body instanceof FormData;
+  if (!isFormData) {
+    headers['Content-Type'] = 'application/json';
+  }
 
   const response = await fetch(`${base}${path}`, {
     ...opts,

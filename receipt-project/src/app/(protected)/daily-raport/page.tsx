@@ -97,9 +97,9 @@ export default function PnlCalendarPage() {
                   key={day}
                   className={`${bgClass} text-white p-2 rounded-lg`}
                 >
-                  <CardContent className="text-center">
+                  <CardContent className="px-0 flex flex-col items-center text-center ">
                     <div className="font-medium">{day}</div>
-                    <div className="text-sm">{display}</div>
+                    <div className="text-sm hidden sm:block">{display}</div>
                   </CardContent>
                 </Card>
               );
@@ -118,9 +118,9 @@ export default function PnlCalendarPage() {
                   key={m}
                   className={`${bgClass} text-white p-2 rounded-lg`}
                 >
-                  <CardContent className="text-center">
+                  <CardContent className="px-0 flex flex-col items-center text-center ">
                     <div className="font-medium">{m}</div>
-                    <div className="text-sm">{display}</div>
+                    <div className="text-sm hidden sm:block">{display}</div>
                   </CardContent>
                 </Card>
               );
