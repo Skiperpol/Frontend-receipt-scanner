@@ -64,7 +64,7 @@ export default function ReceiptScanPage() {
 
       // 2. Utwórz transakcję
       const txPayload = {
-        date: data.date,
+        date: `${data.date} ${data.time ? data.time.slice(0, 5) : ""}`,
         total_amount: data.total,
         description: data.payment_method || "",
       };
