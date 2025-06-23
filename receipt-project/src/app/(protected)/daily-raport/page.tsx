@@ -24,13 +24,11 @@ export default function PnlCalendarPage() {
   useEffect(() => {
     if (!token) return;
     if (view === "daily") {
-      apiFetch(
-        `/api/calendar/daily/?year=${year}&month=${month}`,
-        {},
-        token
-      ).then((data: DailyData) => setDailyData(data));
+      apiFetch(`/calendar/daily/?year=${year}&month=${month}`, {}, token).then(
+        (data: DailyData) => setDailyData(data)
+      );
     } else {
-      apiFetch(`/api/calendar/monthly/?year=${year}`, {}, token).then(
+      apiFetch(`/calendar/monthly/?year=${year}`, {}, token).then(
         (data: MonthlyData) => setMonthlyData(data)
       );
     }
