@@ -73,3 +73,19 @@ Pełną listę pakietów znajdziesz w `package.json`.
 ---
 
 Projekt jest przygotowany do współpracy z backendem udostępniającym REST API. Po podaniu prawidłowego `NEXT_PUBLIC_API_BASE_URL` możesz od razu rozpocząć pracę lokalnie lub wdrożyć aplikację na dowolny hosting obsługujący Node.js.
+### Docker
+
+Aby zbudować obraz i uruchomić aplikację w kontenerze, wykonaj następujące kroki:
+
+```bash
+cd receipt-project
+# budowanie obrazu
+docker build -t receipt-scanner .
+
+# uruchomienie kontenera
+docker run -p 3000:3000 \
+  -e NEXT_PUBLIC_API_BASE_URL=http://adres-backendu \
+  receipt-scanner
+```
+
+Domyślnie aplikacja będzie dostępna pod adresem `http://localhost:3000`.
