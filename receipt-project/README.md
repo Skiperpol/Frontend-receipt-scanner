@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Frontend Receipt Scanner
 
-## Getting Started
+Ten projekt to aplikacja w frameworku **Next.js** (React + TypeScript) służąca do zarządzania wydatkami na podstawie zeskanowanych paragonów. Umożliwia logowanie, rejestrację użytkowników, dodawanie oraz edytowanie transakcji i produktów, a także import paragonów za pomocą aparatu telefonu.
 
-First, run the development server:
+## Dokumentacja użytkownika
+
+1. **Logowanie / Rejestracja**
+   - Po uruchomieniu aplikacji zostaniesz przekierowany na stronę logowania (`/login`).
+   - Jeżeli nie masz konta, przejdź do `/register` i wypełnij formularz.
+
+2. **Transakcje**
+   - Po zalogowaniu domyślną sekcją jest lista transakcji (`/transactions`).
+   - Z poziomu listy możesz przejść do szczegółów transakcji, edytować ją lub usunąć.
+   - Sekcja **Dodaj transakcję** umożliwia ręczne tworzenie pustej transakcji.
+
+3. **Skanowanie paragonów**
+   - W sekcji **Skan** (`/scan`) zrób zdjęcie paragonu aparatem telefonu lub wybierz plik z dysku.
+   - Aplikacja wyśle obraz do API, utworzy odpowiednią transakcję i produkty, a następnie przekieruje do szczegółów.
+
+4. **Dzienny raport**
+   - Widok **Dzienny raport** (`/daily-raport`) prezentuje podsumowanie przychodów/wydatków w układzie dziennym lub miesięcznym.
+
+## Dokumentacja techniczna
+
+### Wymagania
+
+- Node.js w wersji 20 lub nowszej
+- Menedżer pakietów `npm`
+
+### Instalacja
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cd receipt-project
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Stwórz plik `.env.local` i uzupełnij zmienną środowiskową wskazującą adres backendu:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+NEXT_PUBLIC_API_BASE_URL=http://adres-backendu
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Uruchomienie w trybie deweloperskim
 
-## Learn More
+```bash
+npm run dev       # uruchomienie na http://localhost:3000
+npm run phone     # serwer dostępny również w sieci lokalnej
+```
 
-To learn more about Next.js, take a look at the following resources:
+Aplikację produkcyjną można zbudować poleceniem `npm run build` i uruchomić `npm start`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Struktura projektu
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **src/app** – pliki stron Next.js
+  - `login`, `register` – formularze uwierzytelniania
+  - `(protected)` – część dostępna tylko po zalogowaniu (transakcje, skanowanie, raporty)
+- **src/components** – komponenty interfejsu użytkownika oraz katalog `ui` zawierający komponenty z biblioteki *shadcn/ui*
+- **src/context** – globalne konteksty Reacta, m.in. `AuthContext` odpowiadający za stan logowania
+- **src/lib** – pomocnicze funkcje (np. `api.ts` wykonujący zapytania do backendu)
+- **src/hooks** – własne hooki Reacta
 
-## Deploy on Vercel
+### Zależności
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Najważniejsze biblioteki użyte w projekcie:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Next.js** 15 (framework React)
+- **React** 19
+- **shadcn/ui** wraz z komponentami [Radix UI](https://www.radix-ui.com/)
+- **Tailwind CSS** (konfiguracja w `src/app/globals.css`)
+
+Pełną listę pakietów znajdziesz w `package.json`.
+
+---
+
+Projekt jest przygotowany do współpracy z backendem udostępniającym REST API. Po podaniu prawidłowego `NEXT_PUBLIC_API_BASE_URL` możesz od razu rozpocząć pracę lokalnie lub wdrożyć aplikację na dowolny hosting obsługujący Node.js.
